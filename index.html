@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Stream Goal - Setup Guide</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #121212; color: #e0e0e0; line-height: 1.6; padding: 40px; }
+        .container { max-width: 900px; margin: auto; }
+        h1 { color: #00f2ff; border-bottom: 2px solid #333; padding-bottom: 10px; }
+        .demo-box { background: #1a1a1a; padding: 40px; border-radius: 15px; margin: 20px 0; border: 1px solid #333; text-align: center; }
+        .code-section { margin-top: 30px; }
+        .copy-btn { background: #00f2ff; color: #000; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; font-weight: bold; margin-bottom: 5px; }
+        pre { border-radius: 8px; }
+        .step { background: #1e1e1e; padding: 15px; border-left: 4px solid #00f2ff; margin: 10px 0; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🚀 Custom Stream Goal Setup</h1>
+    <p>En moderne, gjennomsiktig donasjonsmåler med rød "Alert-Glow" og regnbue-effekt.</p>
+
+    <div class="step">
+        <strong>Steg 1:</strong> Opprett en "Custom Widget" i StreamElements.<br>
+        <strong>Steg 2:</strong> Åpne editoren og lim inn koden nedenfor i de respektive fanene.
+    </div>
+
+    <div class="code-section">
+        <h3>1. HTML</h3>
+        <button class="copy-btn" onclick="copyCode('html-code')">Kopier HTML</button>
+        <pre><code id="html-code" class="language-html">&lt;div id="goal-wrapper"&gt;
+    &lt;div class="header-row"&gt;
+        &lt;div class="title"&gt;{{goal_title}}&lt;/div&gt;
+        &lt;div class="amount-container"&gt;
+            &lt;span id="current-text"&gt;0&lt;/span&gt;&lt;span class="currency"&gt;kr&lt;/span&gt;
+            &lt;span class="divider"&gt;/&lt;/span&gt;
+            &lt;span id="target-text"&gt;{{goal_amount}}&lt;/span&gt;&lt;span class="currency"&gt;kr&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="bar-bg"&gt;
+        &lt;div id="bar-fill-element" class="bar-fill"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="code-section">
+        <h3>2. CSS</h3>
+        <button class="copy-btn" onclick="copyCode('css-code')">Kopier CSS</button>
+        <pre><code id="css-code" class="language-css">/* Lim inn koden vi laget for CSS her */</code></pre>
+    </div>
+
+    <div class="code-section">
+        <h3>3. JS</h3>
+        <button class="copy-btn" onclick="copyCode('js-code')">Kopier JS</button>
+        <pre><code id="js-code" class="language-javascript">/* Lim inn koden vi laget for JS her */</code></pre>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script>
+    function copyCode(id) {
+        const code = document.getElementById(id).innerText;
+        navigator.clipboard.writeText(code);
+        alert("Kopiert!");
+    }
+</script>
+
+</body>
+</html>
