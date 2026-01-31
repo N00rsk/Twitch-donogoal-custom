@@ -3,101 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stilren Donasjonsmåler for StreamElements</title>
+    <title>Custom Stream Goal Template</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #00f2ff; --bg: #0f0f12; --card: #1a1a1f; }
+        :root { --primary: #00f2ff; --bg: #0f0f12; --card: #1a1a1f; --accent: #ff0000; }
         body { font-family: 'Outfit', sans-serif; background: var(--bg); color: #e0e0e0; line-height: 1.6; padding: 20px; margin: 0; }
         .container { max-width: 1000px; margin: auto; padding: 20px; }
         
         h1 { color: var(--primary); text-align: center; font-size: 2.5rem; margin-bottom: 10px; }
+        h2 { color: var(--primary); margin-top: 40px; border-bottom: 1px solid #333; padding-bottom: 10px; }
         p.subtitle { text-align: center; opacity: 0.7; margin-bottom: 40px; }
 
-        /* LIVE PREVIEW SECTION */
-        .preview-header { font-weight: 600; text-transform: uppercase; font-size: 12px; letter-spacing: 2px; color: var(--primary); margin-bottom: 10px; }
-        .demo-container { 
-            background: #000; 
-            padding: 80px 20px; 
-            border-radius: 20px; 
-            border: 1px solid #333; 
-            margin-bottom: 40px; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Selve widgeten i demoen */
-        #goal-wrapper {
-            width: 600px;
-            padding: 12px 20px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            transition: all 0.3s;
-        }
+        /* Demo Section */
+        .demo-container { background: #000; padding: 60px 20px; border-radius: 20px; border: 1px solid #333; margin-bottom: 40px; display: flex; flex-direction: column; align-items: center; }
+        #goal-wrapper { width: 600px; padding: 12px 20px; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; }
         .header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-        .amount-container { font-weight: 600; font-size: 16px; }
         .bar-bg { width: 100%; height: 10px; background: rgba(255, 255, 255, 0.1); border-radius: 5px; overflow: hidden; }
-        .bar-fill { 
-            height: 100%; width: 17.3%; 
-            background: linear-gradient(90deg, #00f2ff, #0072ff); 
-            transition: width 1s cubic-bezier(0.17, 0.67, 0.83, 0.67); 
-        }
-
-        /* Klasser for effekter */
-        .dono-alert { border-color: #ff0000 !important; box-shadow: 0 0 30px rgba(255, 0, 0, 0.8) !important; }
+        .bar-fill { height: 100%; width: 45%; background: linear-gradient(90deg, #00f2ff, #0072ff); transition: width 1s ease; }
+        
+        /* Alert Effects */
+        .dono-alert { border-color: var(--accent) !important; box-shadow: 0 0 30px rgba(255, 0, 0, 0.8) !important; }
         .rainbow-flash { animation: rainbow-anim 0.2s infinite; }
-        @keyframes rainbow-anim { 
-            0% { background: #ff0000; } 40% { background: #0000ff; } 80% { background: #00ff00; } 100% { background: #ffff00; } 
-        }
+        @keyframes rainbow-anim { 0% { background: #ff0000; } 40% { background: #0000ff; } 80% { background: #00ff00; } 100% { background: #ffff00; } }
 
-        .controls { margin-top: 20px; }
-        .btn-test { background: var(--primary); color: #000; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s; }
-        .btn-test:hover { transform: scale(1.05); }
+        .btn-test { background: var(--primary); color: #000; border: none; padding: 12px 24px; border-radius: 8px; font-weight: bold; cursor: pointer; margin-top: 20px; transition: 0.2s; }
+        .btn-test:hover { background: #fff; transform: translateY(-2px); }
 
-        /* KODE SEKSJON */
-        .code-block { background: var(--card); border-radius: 12px; margin-bottom: 30px; border: 1px solid #333; }
-        .code-header { padding: 10px 20px; background: #25252b; border-radius: 12px 12px 0 0; display: flex; justify-content: space-between; align-items: center; }
-        .copy-btn { background: transparent; border: 1px solid var(--primary); color: var(--primary); padding: 5px 12px; border-radius: 5px; cursor: pointer; font-size: 12px; }
+        /* Guide Section */
+        .guide-step { background: var(--card); padding: 20px; border-radius: 12px; margin-bottom: 15px; border-left: 5px solid var(--primary); }
+        .guide-step span { color: var(--primary); font-weight: bold; margin-right: 10px; }
+
+        /* Code Block Styling */
+        .code-block { background: var(--card); border-radius: 12px; margin-bottom: 30px; border: 1px solid #333; overflow: hidden; }
+        .code-header { padding: 10px 20px; background: #25252b; display: flex; justify-content: space-between; align-items: center; }
+        .copy-btn { background: transparent; border: 1px solid var(--primary); color: var(--primary); padding: 5px 12px; border-radius: 5px; cursor: pointer; transition: 0.2s; }
         .copy-btn:hover { background: var(--primary); color: #000; }
-        pre { margin: 0; padding: 20px; }
+        pre { margin: 0; padding: 20px; overflow-x: auto; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Custom Stream Goal</h1>
-    <p class="subtitle">En minimalistisk donasjonsmåler med avanserte visuelle effekter for StreamElements.</p>
+    <h1>🚀 Custom Stream Goal</h1>
+    <p class="subtitle">En profesjonell, minimalistisk donasjonsmåler med visuelle varsler.</p>
 
-    <div class="preview-header">Live Preview / Demo</div>
     <div class="demo-container">
         <div id="goal-wrapper">
             <div class="header-row">
-                <div style="font-weight:600; font-size:14px; text-transform:uppercase;">Rock 5B+ ( Bedre Backpack )</div>
-                <div class="amount-container">
-                    <span id="current-val">260</span><span>kr</span>
-                    <span style="opacity:0.3; margin: 0 8px;">/</span>
-                    <span>1500</span><span>kr</span>
-                </div>
+                <div style="font-weight:600; font-size:14px; text-transform:uppercase;">DITT DONOGOAL HER</div>
+                <div style="font-weight:600; font-size:16px;">450<span>kr</span> <span style="opacity:0.3; margin:0 8px;">/</span> 1000<span>kr</span></div>
             </div>
-            <div class="bar-bg">
-                <div id="bar-fill-demo" class="bar-fill"></div>
-            </div>
+            <div class="bar-bg"><div id="bar-fill-demo" class="bar-fill"></div></div>
         </div>
-        <div class="controls">
-            <button class="btn-test" onclick="simulateDono()">SIMULER DONASJON (TEST EFFEKT)</button>
-        </div>
+        <button class="btn-test" onclick="simulate()">TEST DONASJONS-EFFEKT</button>
     </div>
 
-    <hr style="border: 0; border-top: 1px solid #333; margin: 40px 0;">
+    <h2>📖 Installasjonsguide</h2>
+    <div class="guide-step"><span>1.</span> Gå til <strong>StreamElements Dashboard</strong> -> <strong>Streaming Tools</strong> -> <strong>Overlays</strong>.</div>
+    <div class="guide-step"><span>2.</span> Lag et nytt overlay (1080p) og trykk på den blå <strong>"+"</strong> knappen.</div>
+    <div class="guide-step"><span>3.</span> Velg <strong>Static/Custom</strong> -> <strong>Custom Widget</strong>.</div>
+    <div class="guide-step"><span>4.</span> Trykk på <strong>Settings</strong>-fanen i menyen til venstre, og velg den blå knappen <strong>"Open Editor"</strong>.</div>
+    <div class="guide-step"><span>5.</span> Kopier koden fra de fire boksene nedenfor og lim dem inn i de respektive fanene (HTML, CSS, JS, FIELDS).</div>
+    <div class="guide-step"><span>6.</span> Trykk <strong>Done</strong> og <strong>Save</strong>. Nå kan du endre tittel og beløp i StreamElements-menyen!</div>
+
+    <h2>💻 Kopier kode</h2>
 
     <div class="code-block">
-        <div class="code-header"><span>HTML</span><button class="copy-btn" onclick="copy('html-code')">Kopier</button></div>
-        <pre><code id="html-code" class="language-html">&lt;div id="goal-wrapper"&gt;
+        <div class="code-header"><span>1. HTML</span><button class="copy-btn" onclick="copy('html-c')">Kopier</button></div>
+        <pre><code id="html-c" class="language-html">&lt;div id="goal-wrapper"&gt;
     &lt;div class="header-row"&gt;
         &lt;div class="title"&gt;{{goal_title}}&lt;/div&gt;
         &lt;div class="amount-container"&gt;
@@ -113,15 +87,9 @@
     </div>
 
     <div class="code-block">
-        <div class="code-header"><span>CSS</span><button class="copy-btn" onclick="copy('css-code')">Kopier</button></div>
-        <pre><code id="css-code" class="language-css">@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;600&amp;display=swap');
-
-#goal-wrapper {
-    position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
-    width: 600px; padding: 12px 20px; background: rgba(0, 0, 0, 0.6);
-    backdrop-filter: blur(10px); border: 2px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px; font-family: 'Outfit', sans-serif; color: white;
-}
+        <div class="code-header"><span>2. CSS</span><button class="copy-btn" onclick="copy('css-c')">Kopier</button></div>
+        <pre><code id="css-c" class="language-css">@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;600&display=swap');
+#goal-wrapper { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); width: 600px; padding: 12px 20px; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 12px; font-family: 'Outfit', sans-serif; color: white; }
 .header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
 .title { font-weight: 600; font-size: 14px; text-transform: uppercase; }
 .bar-bg { width: 100%; height: 10px; background: rgba(255, 255, 255, 0.1); border-radius: 5px; overflow: hidden; }
@@ -132,12 +100,11 @@
     </div>
 
     <div class="code-block">
-        <div class="code-header"><span>JAVASCRIPT</span><button class="copy-btn" onclick="copy('js-code')">Kopier</button></div>
-        <pre><code id="js-code" class="language-javascript">let goalTarget = 0; let currentTotal = 0;
+        <div class="code-header"><span>3. JAVASCRIPT</span><button class="copy-btn" onclick="copy('js-c')">Kopier</button></div>
+        <pre><code id="js-c" class="language-javascript">let goalTarget = 0; let currentTotal = 0;
 window.addEventListener('onWidgetLoad', function (obj) {
-    const data = obj.detail.session.data;
-    goalTarget = obj.detail.fieldData.goal_amount || 1500;
-    currentTotal = data['tips-session']['amount'] || 0;
+    goalTarget = obj.detail.fieldData.goal_amount || 1000;
+    currentTotal = obj.detail.session.data['tips-session']['amount'] || 0;
     document.getElementById('target-text').innerText = goalTarget;
     render(false);
 });
@@ -159,23 +126,27 @@ function render(isDono) {
     }
 }</code></pre>
     </div>
+
+    <div class="code-block">
+        <div class="code-header"><span>4. FIELDS (JSON)</span><button class="copy-btn" onclick="copy('json-c')">Kopier</button></div>
+        <pre><code id="json-c" class="language-json">{
+  "goal_title": { "type": "text", "label": "Mål Tittel", "value": "DITT DONOGOAL HER" },
+  "goal_amount": { "type": "number", "label": "Mål Beløp (kr)", "value": 1000 }
+}</code></pre>
+    </div>
 </div>
 
 <script>
-    function simulateDono() {
+    function simulate() {
         const wrap = document.getElementById('goal-wrapper');
         const bar = document.getElementById('bar-fill-demo');
-        wrap.classList.add('dono-alert');
-        bar.classList.add('rainbow-flash');
-        setTimeout(() => {
-            wrap.classList.remove('dono-alert');
-            bar.classList.remove('rainbow-flash');
-        }, 3000);
+        wrap.classList.add('dono-alert'); bar.classList.add('rainbow-flash');
+        setTimeout(() => { wrap.classList.remove('dono-alert'); bar.classList.remove('rainbow-flash'); }, 3000);
     }
     function copy(id) {
         const text = document.getElementById(id).innerText;
         navigator.clipboard.writeText(text);
-        alert("Kopiert til utklippstavle!");
+        alert("Kopiert!");
     }
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
